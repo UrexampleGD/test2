@@ -329,24 +329,8 @@ local function HUD_Update(dt)
  end
 end
 
-local tab = (shared and shared.CreateTab) and shared.CreateTab("Ultra Instinct", "rbxassetid://6031280882") or nil
-local section = (tab and tab.AddSection) and tab:AddSection("⚡ ULTRA INSTINCT " .. VERSION, "PERFORMANCE MODE") 
-    or (shared and shared.AddSection and shared.AddSection("⚡ ULTRA INSTINCT "..VERSION)) or nil
-
-if not section then
-  section = {
-    AddToggle = function() return function() end end,
-    AddDropdown = function() return function() end end,
-    AddButton = function() return function() end end,
-    AddSlider = function() return {SetValue=function() end} end,
-    AddLabel = function() return {SetValue=function() end} end,
-    AddParagraph = function() return {SetValue=function() end} end,
-    AddColorpicker = function() return {SetHexValue=function() end, SetRGBValue=function() end} end,
-    AddTextBox = function() return function() end end,
-    AddKeybind = function() return function() end end,
-    AddPlayerDropdown = function() return function() end end,
-  }
-end
+local tab = shared.CreateTab("Ultra Instinct", "/axioriasolver/testplugin/refs/heads/main/icon")
+local section = tab:AddSection("⚡ ULTRA INSTINCT " .. VERSION, "PERFORMANCE MODE")
 
 section:AddToggle("⚡ АКТИВИРОВАТЬ", function(st)
  State.Enabled=st
@@ -478,4 +462,4 @@ end
 _G.__UI_CLEANUP=cleanup
 
 UpdateCache(); UpdateMurdererCache(); HUD_Init()
-print("⚡ ULTRA INSTINCT "..VERSION.." loaded! PRO + INSTINCT + MIXED modes ready to go!")
+shared.Notify("⚡ ULTRA INSTINCT "..VERSION.." loaded!", 2)
