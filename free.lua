@@ -329,14 +329,15 @@ local function HUD_Update(dt)
  end
 end
 
-local tab = shared.CreateTab("Ultra Instinct", "/axioriasolver/testplugin/refs/heads/main/icon")
-local section = tab:AddSection("⚡ ULTRA INSTINCT " .. VERSION, "PERFORMANCE MODE")
+local tab = shared.CreateTab("Ultra Instinct", "/UrexampleGD/ok-icon/refs/heads/main/images__2_-removebg-preview")
+local section = tab:AddSection("ULTRA INSTINCT " .. VERSION, "PERFORMANCE MODE")
 
-section:AddToggle("⚡ АКТИВИРОВАТЬ", function(st)
+section:AddToggle("Enable", function(st)
  State.Enabled=st
  if st then InitBase(); UpdateCache(); State.Target=nil else State.Target=nil end
 end)
-section:AddDropdown("Режим", {"PRO","INSTINCT","SECRETIVE","ANNIHILATING","ADAPTIVE","MIXED","PING100","PING200","PING300_400"}, function(s) State.CurrentMode=s; lastHUDKey=nil end)
+
+section:AddDropdown("Mode", {"PRO","INSTINCT","SECRETIVE","ANNIHILATING","ADAPTIVE","MIXED","PING100","PING200","PING300_400"}, function(s) State.CurrentMode=s; lastHUDKey=nil end)
 
 local g = section:AddToggle("Gravity", function(s) State.Settings.useGravity=s end); pcall(function() g(true) end)
 local d = section:AddToggle("Drags", function(s) State.Settings.useDrag=s end); pcall(function() d(true) end)
@@ -344,10 +345,10 @@ local j = section:AddToggle("Predict Jump", function(s) State.Settings.predictJu
 local a = section:AddToggle("Lead", function(s) State.Settings.adaptiveLead=s end); pcall(function() a(true) end)
 local l = section:AddToggle("Target Lock", function(s) State.Settings.targetLock=s end); pcall(function() l(true) end)
 
-section:AddButton("Статистика (F9)", function()
+section:AddButton("Stats (F9)", function()
  local s = State.Stats
  local ac = s.Shots > 0 and string.format("%.1f%%", (s.Hits / s.Shots) * 100) or "-"
- print("══ ULTRA INSTINCT ══  Shots:"..s.Shots.." Hits:"..s.Hits.." Acc:"..ac..
+ print("== ULTRA INSTINCT ==  Shots:"..s.Shots.." Hits:"..s.Hits.." Acc:"..ac..
        " Kills:"..s.Kills.." Deaths:"..s.Deaths.." Streak:"..s.CurrentStreak.."/"..s.BestStreak..
        " Mode:"..(State.CurrentMode or "-").." Ping:"..floor(State.PingSmooth).."ms")
 end)
@@ -462,4 +463,4 @@ end
 _G.__UI_CLEANUP=cleanup
 
 UpdateCache(); UpdateMurdererCache(); HUD_Init()
-shared.Notify("⚡ ULTRA INSTINCT "..VERSION.." loaded!", 2)
+pcall(function() shared.Notify("ULTRA INSTINCT "..VERSION.." loaded!", 2) end)
